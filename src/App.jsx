@@ -5,9 +5,9 @@ import Course from './components/course/course';
 
 const App = () => {
    return (
-     <MainLayout>
-        <Course />
-     </MainLayout>
+      <MainLayout>
+         <Course />
+      </MainLayout>
    );
 }
 
