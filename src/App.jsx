@@ -1,13 +1,27 @@
 import React from 'react';
 
 import MainLayout from './components/layouts/MainLayout';
-import Course from './components/course/course';
+import Course from './components/course/Course';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Login from './components/login/Login';
+
 
 const App = () => {
    return (
-      <MainLayout>
-         <Course />
-      </MainLayout>
+      <BrowserRouter>
+         <MainLayout>
+
+            <Routes>
+               <Route path="/login" element={<Login />} />
+               <Route
+                  path="/"
+                  element={
+                     <Course />
+                  }
+               />
+            </Routes>
+         </MainLayout>
+      </BrowserRouter>
    );
 }
 

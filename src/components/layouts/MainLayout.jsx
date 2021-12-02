@@ -1,16 +1,28 @@
 import React from 'react';
-import Footer from '../comon/Footer';
-import MainNav from '../Navs/MainNav';
+import { Routes, Route } from 'react-router-dom';
+
 import TopNav from '../Navs/TopNav';
 import Header from './../comon/Header';
+import MainNav from '../Navs/MainNav';
+import Footer from '../comon/Footer';
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, path }) => {
+   console.log(path);
    return (
       <>
          <div className="landing-layer">
             <div className="container">
                <TopNav />
-               <Header />
+
+               {/* {pathName === "/" ?  : null} */}
+               <Routes>
+                  <Route
+                     path="/"
+                     element={
+                        <Header />
+                     }
+                  />
+               </Routes>
             </div>
          </div>
 
