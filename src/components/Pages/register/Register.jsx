@@ -1,6 +1,8 @@
-import axios from 'axios';
 import React from 'react';
+
 import { toast } from 'react-toastify';
+
+import { registerUser } from '../../../services/userService';
 import { useState } from 'react/cjs/react.development';
 
 const Register = () => {
@@ -15,37 +17,31 @@ const Register = () => {
         setPassword("");
     }
 
-    const handleRegisterSubmit = e => {
+    const handleRegisterSubmit = async e => {
         e.preventDefault();
+
         if (fullname.trim().length > 0 && email.trim().length > 0 && password.trim().length > 0) {
-            const registerUser = {
+            //if all fields are writed 
+
+            const newUser = {
                 fullname,
                 email,
                 password
             }
-            console.log(registerUser);
-            axios
-                .post(
-                    "https://toplearnapi.ghorbany.dev/api/register",
-                    JSON.stringify(registerUser),
-                    {
-                        headers:
-                            { "Content-Type": "application/json" }
-                    }
-                )
-                .then(({ status, data }) => {
-                    if (status === 201) {
-                        console.log(data);
-                        toast.success(`ثبت نام موفقیت آمیز بود.`)
-                        clearStates();
-                    }
-                })
-                .catch((ex) => {
-                    console.log(ex);
-                    toast.error(`ثبت نام موفقیت آمیز نبود.`)
-                })
+
+            try {
+                const { status } = await registerUser(newUser)
+                if (status === 201) {
+                    toast.success(`ثبت نام موفقیت آمیز بود.`)
+                    clearStates();
+                }
+            } catch (ex) {
+                console.log(ex);
+                toast.error(`ثبت نام موفقیت آمیز نبود. فیلد ها را دوباره بررسسی کنید.`)
+            }
+
         } else {
-            console.log("فیلد خالی");
+            toast.warn("همه فیلدها باید تکمیل شوند.");
         }
     }
 
