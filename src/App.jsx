@@ -1,8 +1,9 @@
 import React from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import MainLayout from './components/layouts/MainLayout';
 import Course from './components/course/Course';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from './components/Pages/login/Login';
 import Register from './components/Pages/register/Register';
 import Archive from './components/Pages/archive/archive';
@@ -45,6 +46,7 @@ const App = () => {
                />
             </Routes>
          </MainLayout>
+         <ToastContainer />
       </BrowserRouter>
    );
 }
