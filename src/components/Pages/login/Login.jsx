@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { toast } from 'react-toastify';
+
+
 import { useState } from 'react/cjs/react.development';
 import { loginUser } from '../../../services/userService';
 
@@ -11,6 +12,8 @@ const Login = () => {
 
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
+
+   const [loadingP, setLoadingP] = useState(false);
 
    const resetStates = () => {
       setEmail("");
@@ -24,14 +27,19 @@ const Login = () => {
          password
       }
       try {
+         setLoadingP(true);
          const { status, data } = await loginUser(signinUser)
          if (status === 200) {
             toast.success("ورود موفقیت امیز بود.")
             localStorage.setItem('token', data.token);
             resetStates();
+            setLoadingP(false);
             navigate('/', { replace: true });
          }
-      } catch (ex) { console.log(ex); }
+      } catch (ex) {
+         console.log(ex);
+         setLoadingP(false);
+      }
    }
 
    return (
@@ -48,6 +56,10 @@ const Login = () => {
             <div className="container-content">
 
                <header><h2> ورود به سایت </h2></header>
+               {loadingP ? (
+                  <div className="c-loader"><img src="assets/images/Preloader.gif" width="256" height="256" /></div>
+               ) : null}
+
 
                <div className="form-layer">
 
@@ -62,6 +74,7 @@ const Login = () => {
                            aria-describedby="email-address"
                            value={email}
                            onChange={e => setEmail(e.target.value)}
+                           required
                         />
                      </div>
 
@@ -74,6 +87,8 @@ const Login = () => {
                            aria-describedby="password"
                            value={password}
                            onChange={e => setPassword(e.target.value)}
+                           required
+                           minLength="6"
                         />
                      </div>
 

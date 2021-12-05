@@ -11,6 +11,8 @@ const Register = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
+    const [loadingP, setLoadingP] = useState(false);
+
     const clearStates = () => {
         setFullname("");
         setEmail("");
@@ -30,13 +32,16 @@ const Register = () => {
             }
 
             try {
+                setLoadingP(true);
                 const { status } = await registerUser(newUser)
                 if (status === 201) {
+                    setLoadingP(false);
                     toast.success(`ثبت نام موفقیت آمیز بود.`)
                     clearStates();
                 }
             } catch (ex) {
                 console.log(ex);
+                setLoadingP(false);
                 toast.error(`ثبت نام موفقیت آمیز نبود. فیلد ها را دوباره بررسسی کنید.`)
             }
 
@@ -61,6 +66,9 @@ const Register = () => {
                 <div className="container-content">
 
                     <header><h2> عضویت در سایت </h2></header>
+                    {loadingP ? (
+                        <div className="c-loader"><img src="assets/images/Preloader.gif" width="256" height="256" /></div>
+                    ) : null}
 
                     <div className="form-layer">
 
