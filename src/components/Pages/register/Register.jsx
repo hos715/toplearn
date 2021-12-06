@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import { registerUser } from '../../../services/userService';
 import { useState } from 'react/cjs/react.development';
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
 
@@ -52,7 +53,9 @@ const Register = () => {
 
     return (
         <>
-
+            <Helmet>
+                <title>تاپلرن | عضویت در سایت</title>
+            </Helmet>
             <div className="container">
                 <nav aria-label="breadcrumb">
                     <ul className="breadcrumb">

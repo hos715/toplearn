@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 import { useState } from 'react/cjs/react.development';
 import { loginUser } from '../../../services/userService';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
 
@@ -44,6 +45,9 @@ const Login = () => {
 
    return (
       <>
+         <Helmet>
+            <title>تاپلرن | ورود به سایت</title>
+         </Helmet>
          <div className="container">
             <nav aria-label="breadcrumb">
                <ul className="breadcrumb">

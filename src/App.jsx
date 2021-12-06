@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
@@ -11,6 +11,9 @@ import SingleCourse from './components/course/SingleCourse';
 
 
 const App = () => {
+   useEffect(()=>{
+      require('./utils/script');
+   },[])
    return (
       <BrowserRouter>
          <MainLayout>

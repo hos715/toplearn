@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import TopNav from '../Navs/TopNav';
 import Header from './../comon/Header';
@@ -10,6 +11,9 @@ const MainLayout = ({ children, path }) => {
    console.log(path);
    return (
       <>
+         <Helmet>
+            <title>خودآموز تاپلرن</title>
+         </Helmet>
          <div className="landing-layer">
             <div className="container">
                <TopNav />
