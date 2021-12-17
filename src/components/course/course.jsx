@@ -1,96 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-const Course = () => {
-   return (
-      <section className="terms-items">
-         <header>
-            <h2> آخرین دوره های تاپ لرن </h2>
-            <Link to="archive"> مشاهده همه دوره ها </Link>
-         </header>
-         <div className="row">
+import React from "react";
+import { Link } from "react-router-dom";
 
-            <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-               <article>
-                  <Link to="single-course#" className="img-layer"><img src="assets/images/pic/1.jpg" alt="" /></Link>
-                  <h2><Link to="single-course"> آموزش متریال دیاین در زامارین </Link></h2>
-                  <span> رایگان </span>
-                  <i>1:52:32</i>
-               </article>
-            </div>
-
-
-            <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-               <article>
-                  <Link to="single-course#" className="img-layer"><img src="assets/images/pic/2.jpg" alt="" /></Link>
-                  <h2><Link to="single-course"> آموزش متریال دیاین در زامارین </Link></h2>
-                  <span> رایگان </span>
-                  <i>1:52:32</i>
-               </article>
-            </div>
-
-
-            <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-               <article>
-                  <Link to="single-course#" className="img-layer"><img src="assets/images/pic/3.jpg" alt="" /></Link>
-                  <h2><Link to="single-course"> آموزش متریال دیاین در زامارین </Link></h2>
-                  <span> 150.000 تومان </span>
-                  <i>1:52:32</i>
-               </article>
-            </div>
-
-
-            <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-               <article>
-                  <Link to="single-course#" className="img-layer"><img src="assets/images/pic/4.jpg" alt="" /></Link>
-                  <h2><Link to="single-course"> آموزش متریال دیاین در زامارین </Link></h2>
-                  <span> رایگان </span>
-                  <i>1:52:32</i>
-               </article>
-            </div>
-
-
-            <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-               <article>
-                  <Link to="single-course#" className="img-layer"><img src="assets/images/pic/5.jpg" alt="" /></Link>
-                  <h2><Link to="single-course"> آموزش متریال دیاین در زامارین </Link></h2>
-                  <span> 15.000 تومان </span>
-                  <i>1:52:32</i>
-               </article>
-            </div>
-
-
-            <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-               <article>
-                  <Link to="single-course#" className="img-layer"><img src="assets/images/pic/6.jpg" alt="" /></Link>
-                  <h2><Link to="single-course"> آموزش متریال دیاین در زامارین </Link></h2>
-                  <span> رایگان </span>
-                  <i>1:52:32</i>
-               </article>
-            </div>
-
-
-            <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-               <article>
-                  <Link to="single-course#" className="img-layer"><img src="assets/images/pic/7.jpg" alt="" /></Link>
-                  <h2><Link to="single-course"> آموزش متریال دیاین در زامارین </Link></h2>
-                  <span> 20.000 تومان </span>
-                  <i>1:52:32</i>
-               </article>
-            </div>
-
-
-            <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-               <article>
-                  <Link to="single-course#" className="img-layer"><img src="assets/images/pic/8.jpg" alt="" /></Link>
-                  <h2><Link to="single-course"> آموزش متریال دیاین در زامارین </Link></h2>
-                  <span> 75.000 تومان </span>
-                  <i>1:52:32</i>
-               </article>
-            </div>
-
-         </div>
-      </section>
-   );
-}
+const Course = ({ courses }) => {
+   console.log(`courses: ${courses}`);
+  return (
+    <section className="terms-items">
+      <header>
+        <h2> آخرین دوره های تاپ لرن </h2>
+        <Link to="archive"> مشاهده همه دوره ها </Link>
+      </header>
+      <div className="row">
+        {courses.map((course) => (
+          <div
+            key={course._id}
+            className="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col"
+          >
+            <article>
+              <Link to={`/course${course._id}`} className="img-layer">
+                <img
+                  src={`https://toplearnapi.ghorbany.dev/${course.imageUrl}`}
+                  alt=""
+                />
+              </Link>
+              <h2>
+                <Link to={`/course${course._id}`}> {course.title} </Link>
+              </h2>
+              <span> {course.price === 0 ? "رایگان" : course.price} </span>
+              <i>1:52:32</i>
+            </article>
+          </div>
+        ))}
+      </div>
+      ;
+    </section>
+  );
+};
 
 export default Course;

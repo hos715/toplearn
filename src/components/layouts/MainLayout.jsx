@@ -8,7 +8,6 @@ import MainNav from '../Navs/MainNav';
 import Footer from '../comon/Footer';
 
 const MainLayout = ({ children, path }) => {
-   console.log(path);
    return (
       <>
          <Helmet>
